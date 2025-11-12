@@ -1,21 +1,37 @@
 ﻿using gamesstore.Domain.DomainException;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gamesstore.Domain
 {
     public class Game
     {
-        public Game(int id, string name, decimal price, DateTime publicationDate, Category category)
+        public Game() { }
+        public Game(int id, string name, decimal price, DateTime publicationDate)
         {
             Id = id;
             Created_At = DateTime.UtcNow;
             IsValid(name, price, publicationDate);
-            Category = category;
         }
 
+        [Key]
         public int Id { get; private set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 characters long")]
         public string Name { get; private set; } = string.Empty;
+
+        [Required]
+        [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999.")]
+        [Column(TypeName = "decimal(4,2)")]
         public decimal Price { get; private set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
         public DateTime Created_At { get; private set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
         public DateTime PublicationDate { get; private set; }
 
 
