@@ -30,5 +30,11 @@ namespace gamesstore.Domain
             Name = name;
             Games = new Collection<Game>();
         }
+
+        public void Update(string name)
+        {
+            IsValid(name);
+            Name = name;
+        }
     }
 }
