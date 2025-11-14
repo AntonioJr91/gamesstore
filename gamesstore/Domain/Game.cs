@@ -20,10 +20,6 @@ namespace gamesstore.Domain
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 characters long")]
         public string Name { get; private set; } = string.Empty;
-
-        [Required]
-        [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999.")]
-        [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; private set; }
 
         [Required]
