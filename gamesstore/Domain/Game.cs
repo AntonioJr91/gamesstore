@@ -23,7 +23,7 @@ namespace gamesstore.Domain
 
         [Required]
         [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999.")]
-        [Column(TypeName = "decimal(4,2)")]
+        [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; private set; }
 
         [Required]
