@@ -1,16 +1,16 @@
 ﻿using gamesstore.Domain.DomainException;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gamesstore.Domain
 {
     public class Game
     {
         public Game() { }
-        public Game(int id, string name, decimal price, DateTime publicationDate)
+        public Game(int id, string name, decimal price, DateTime publicationDate, int categoryId)
         {
             Id = id;
             Created_At = DateTime.UtcNow;
+            CategoryId = categoryId;
             IsValid(name, price, publicationDate);
         }
 
@@ -37,6 +37,14 @@ namespace gamesstore.Domain
         {
             get => _category ?? new Category("Others");
             private set => _category = value == null || string.IsNullOrEmpty(value.Name) ? new Category("Others") : value;
+        }
+
+        public void Update(string name, decimal price, DateTime publicationDate)
+        {
+            IsValid(name, price, publicationDate);
+            Name = name;
+            Price = price;
+            PublicationDate = publicationDate;
         }
 
         private void IsValid(string name, decimal price, DateTime publicationDate)
